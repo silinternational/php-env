@@ -1,0 +1,15 @@
+{
+    "name": "silinternational/php-env",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {"Sil\\PhpEnv\\": "src/"}
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "johnkary/phpunit-speedtrap": "1.*",
+        "phpunit/phpunit": "4.*"
+    }
+}

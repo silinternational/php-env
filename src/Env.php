@@ -27,7 +27,7 @@ class Env
     {
         $value = \getenv($name);
 
-        if ( ! $value) {
+        if ($value === false) {
             return $default;
         } elseif($value == 'false') {
             return false;
