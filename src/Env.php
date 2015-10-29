@@ -29,11 +29,11 @@ class Env
 
         if ($value === false) {
             return $default;
-        } elseif($value == 'false') {
+        } elseif ($value == 'false') {
             return false;
-        } elseif($value == 'true') {
+        } elseif ($value == 'true') {
             return true;
-        } elseif($value == 'null') {
+        } elseif ($value == 'null') {
             return null;
         } else {
             return $value;
