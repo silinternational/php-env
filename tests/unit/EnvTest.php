@@ -55,6 +55,34 @@ class EnvTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $actual);
     }
     
+    public function testGet_falseTitlecase()
+    {
+        // Arrange
+        $name = 'TEST_FALSE_TITLECASE';
+        $this->putEnv($name . '=False');
+        $expected = false;
+        
+        // Act
+        $actual = Env::get($name);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGet_falseUppercase()
+    {
+        // Arrange
+        $name = 'TEST_FALSE_UPPERCASE';
+        $this->putEnv($name . '=FALSE');
+        $expected = false;
+        
+        // Act
+        $actual = Env::get($name);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
     public function testGet_nonEmptyString()
     {
         // Arrange
@@ -110,11 +138,67 @@ class EnvTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $actual);
     }
     
+    public function testGet_nullTitlecase()
+    {
+        // Arrange
+        $name = 'TEST_NULL_TITLECASE';
+        $this->putEnv($name . '=Null');
+        $expected = null;
+        
+        // Act
+        $actual = Env::get($name);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGet_nullUppercase()
+    {
+        // Arrange
+        $name = 'TEST_NULL_UPPERCASE';
+        $this->putEnv($name . '=NULL');
+        $expected = null;
+        
+        // Act
+        $actual = Env::get($name);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
     public function testGet_true()
     {
         // Arrange
         $name = 'TEST_TRUE';
         $this->putEnv($name . '=true');
+        $expected = true;
+        
+        // Act
+        $actual = Env::get($name);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGet_trueTitlecase()
+    {
+        // Arrange
+        $name = 'TEST_TRUE_TITLECASE';
+        $this->putEnv($name . '=True');
+        $expected = true;
+        
+        // Act
+        $actual = Env::get($name);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGet_trueUppercase()
+    {
+        // Arrange
+        $name = 'TEST_TRUE_UPPERCASE';
+        $this->putEnv($name . '=TRUE');
         $expected = true;
         
         // Act
