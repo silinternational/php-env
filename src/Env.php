@@ -5,7 +5,8 @@ class Env
 {
     /**
      * Retrieve the value of the specified environment variable, translating
-     * values of 'true', 'false', and 'null' to their actual non-string values.
+     * values of 'true', 'false', and 'null' (case-insensitive) to their actual
+     * non-string values.
      * 
      * PHP's built-in "getenv()" function returns a string (or false, if the
      * environment variable is not set). If the value is 'false', then it will
@@ -14,8 +15,8 @@ class Env
      * that it refers to.
      * 
      * NOTE: If the specified environment variable is not set and no default
-     * value was provided, this function returns null (rather returning false
-     * the way getenv() does).
+     * value was provided, this function returns null (rather than returning
+     * false the way getenv() does).
      * 
      * @param string $name The name of the desired environment variable.
      * @param mixed $default The default value to return if no such environment
@@ -25,18 +26,22 @@ class Env
      */
     public static function get($name, $default = null)
     {
-        $value = \getenv($name);
+        $originalValue = \getenv($name);
 
-        if ($value === false) {
+        if ($originalValue === false) {
             return $default;
-        } elseif($value == 'false') {
+        }
+        
+        $lowercasedValue = strtolower($originalValue);
+        
+        if ($lowercasedValue === 'false') {
             return false;
-        } elseif($value == 'true') {
+        } elseif ($lowercasedValue === 'true') {
             return true;
-        } elseif($value == 'null') {
+        } elseif ($lowercasedValue === 'null') {
             return null;
         } else {
-            return $value;
+            return $originalValue;
         }
     }
 }
