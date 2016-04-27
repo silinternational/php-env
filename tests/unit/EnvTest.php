@@ -83,12 +83,40 @@ class EnvTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $actual);
     }
     
-    public function testGet_nonEmptyString()
+    public function testGet_nonEmptyLowercaseString()
     {
         // Arrange
-        $name = 'TEST_NON_EMPTY_STRING';
+        $name = 'TEST_NON_EMPTY_LOWERCASE_STRING';
         $this->putEnv($name . '=abc123');
         $expected = 'abc123';
+        
+        // Act
+        $actual = Env::get($name);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGet_nonEmptyMixedCaseString()
+    {
+        // Arrange
+        $name = 'TEST_NON_EMPTY_MIXED_CASE_STRING';
+        $this->putEnv($name . '=aBc123');
+        $expected = 'aBc123';
+        
+        // Act
+        $actual = Env::get($name);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGet_nonEmptyUppercaseString()
+    {
+        // Arrange
+        $name = 'TEST_NON_EMPTY_UPPERCASE_STRING';
+        $this->putEnv($name . '=ABC123');
+        $expected = 'ABC123';
         
         // Act
         $actual = Env::get($name);
