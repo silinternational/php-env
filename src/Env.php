@@ -15,8 +15,8 @@ class Env
      * that it refers to.
      * 
      * NOTE: If the specified environment variable is not set and no default
-     * value was provided, this function returns null (rather returning false
-     * the way getenv() does).
+     * value was provided, this function returns null (rather than returning
+     * false the way getenv() does).
      * 
      * @param string $name The name of the desired environment variable.
      * @param mixed $default The default value to return if no such environment
