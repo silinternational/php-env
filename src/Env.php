@@ -1,6 +1,8 @@
 <?php
 namespace Sil\PhpEnv;
 
+use Sil\PhpEnv;
+
 class Env
 {
     /**
@@ -18,16 +20,16 @@ class Env
      * value was provided, this function returns null (rather than returning
      * false the way getenv() does).
      * 
-     * @param string $name The name of the desired environment variable.
+     * @param string $varname The name of the desired environment variable.
      * @param mixed $default The default value to return if no such environment
      *     variable exists.
      * @return mixed The resulting value (if set), or the given default value
      *     (if any, otherwise null).
      */
-    public static function get($name, $default = null)
+    public static function get($varname, $default = null)
     {
-        $originalValue = \getenv($name);
-
+        $originalValue = \getenv($varname);
+        
         if ($originalValue === false) {
             return $default;
         }
@@ -43,5 +45,29 @@ class Env
         } else {
             return $originalValue;
         }
+    }
+    
+    public static function requireEnv($varname)
+    {
+        $originalValue = Env::get($varname);
+        
+        if ($originalValue === null) {
+            $message = "Required environment variable: $varname, not found.";
+            throw new EnvVarNotFoundException($message);
+        }
+        
+        return $originalValue;
+    }
+    
+    public static function getArray($varname, $default = null)
+    {
+        // TODO
+        
+    }
+    
+    public static function requireArray($varname)
+    {
+        // TODO
+        
     }
 }

@@ -10,6 +10,6 @@
     },
     "require-dev": {
         "johnkary/phpunit-speedtrap": "1.*",
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "^6.1"
     }
 }

@@ -1,9 +1,11 @@
 <?php
 namespace Sil\PhpEnv\tests;
 
+use PHPUnit\Framework\TestCase;
 use Sil\PhpEnv\Env;
+use Sil\PhpEnv\EnvVarNotFoundException;
 
-class EnvTest extends \PHPUnit_Framework_TestCase
+class EnvTest extends TestCase
 {
     /**
      * Set an environment variable using PHP's built-in putenv(), but fail the
@@ -234,5 +236,36 @@ class EnvTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertSame($expected, $actual);
+    }
+    
+    public function testRequireEnv_existsOK()
+    {
+        // Arrange
+        $varname = 'TEST_REQUIREENV_EXISTSOK';
+        $this->putEnv($varname . '=exists');
+        $expected = 'exists';
+        
+        // Actual
+        $actual = Env::requireEnv($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testRequireEnv_throwsException()
+    {
+        // Arrange
+        $varname = 'TEST_REQUIREENV_EXCEPTION';
+        // didn't putEnv($varname), so it should throw Exception
+        // $this->putEnv($varname . '=');
+        $expected = '';
+        
+        // Actual
+        $this->expectException(EnvVarNotFoundException::class);
+
+        $actual = Env::requireEnv($varname);
+
+        // Assert
+        $this->fail("Should have thrown EnvVarNotFoundException.");
     }
 }
