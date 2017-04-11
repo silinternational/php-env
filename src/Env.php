@@ -58,10 +58,10 @@ class Env
         $value = self::get($varname);
         
         if ($value === null) {
-            $message = "Required environment variable: " . $varname . ", not found.";
+            $message = 'Required environment variable: ' . $varname . ', not found.';
             throw new EnvVarNotFoundException($message);
         } elseif ($value === '') {
-            $message = "Required environment variable: " . $varname . ", cannot be empty.";
+            $message = 'Required environment variable: ' . $varname . ', cannot be empty.';
             throw new EnvVarNotFoundException($message);
         }
         
