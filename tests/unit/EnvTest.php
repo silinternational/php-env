@@ -29,10 +29,23 @@ class EnvTest extends TestCase
         }
     }
     
+    public function testGet_notFoundNull()
+    {
+        // Arrange
+        $name = 'TESTGET_NOTFOUNDNULL';
+        $expected = null;
+        
+        // Act
+        $actual = Env::get($name);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
     public function testGet_emptyString()
     {
         // Arrange
-        $name = 'TEST_EMPTY_STRING';
+        $name = 'TESTGET_EMPTYSTRING';
         $this->putEnv($name . '=');
         $expected = '';
         
@@ -46,7 +59,7 @@ class EnvTest extends TestCase
     public function testGet_false()
     {
         // Arrange
-        $name = 'TEST_FALSE';
+        $name = 'TESTGET_FALSE';
         $this->putEnv($name . '=false');
         $expected = false;
         
@@ -60,7 +73,7 @@ class EnvTest extends TestCase
     public function testGet_falseTitlecase()
     {
         // Arrange
-        $name = 'TEST_FALSE_TITLECASE';
+        $name = 'TESTGET_FALSETITLECASE';
         $this->putEnv($name . '=False');
         $expected = false;
         
@@ -74,7 +87,7 @@ class EnvTest extends TestCase
     public function testGet_falseUppercase()
     {
         // Arrange
-        $name = 'TEST_FALSE_UPPERCASE';
+        $name = 'TESTGET_FALSEUPPERCASE';
         $this->putEnv($name . '=FALSE');
         $expected = false;
         
@@ -88,7 +101,7 @@ class EnvTest extends TestCase
     public function testGet_nonEmptyLowercaseString()
     {
         // Arrange
-        $name = 'TEST_NON_EMPTY_LOWERCASE_STRING';
+        $name = 'TESTGET_NONEMPTYLOWERCASESTRING';
         $this->putEnv($name . '=abc123');
         $expected = 'abc123';
         
@@ -102,7 +115,7 @@ class EnvTest extends TestCase
     public function testGet_nonEmptyMixedCaseString()
     {
         // Arrange
-        $name = 'TEST_NON_EMPTY_MIXED_CASE_STRING';
+        $name = 'TESTGET_NONEMPTYMIXEDCASESTRING';
         $this->putEnv($name . '=aBc123');
         $expected = 'aBc123';
         
@@ -116,7 +129,7 @@ class EnvTest extends TestCase
     public function testGet_nonEmptyUppercaseString()
     {
         // Arrange
-        $name = 'TEST_NON_EMPTY_UPPERCASE_STRING';
+        $name = 'TESTGET_NONEMPTYUPPERCASESTRING';
         $this->putEnv($name . '=ABC123');
         $expected = 'ABC123';
         
@@ -130,7 +143,7 @@ class EnvTest extends TestCase
     public function testGet_notSetHasDefault()
     {
         // Arrange
-        $name = 'TEST_NOT_SET';
+        $name = 'TESTGET_NOTSETHASDEFAULT';
         $default = 'some default value';
         $expected = 'some default value';
         
@@ -144,7 +157,7 @@ class EnvTest extends TestCase
     public function testGet_notSetNoDefault()
     {
         // Arrange
-        $name = 'TEST_NOT_SET';
+        $name = 'TESTGET_NOTSETNODEFAULT';
         $expected = null;
         
         // Act
@@ -157,7 +170,7 @@ class EnvTest extends TestCase
     public function testGet_null()
     {
         // Arrange
-        $name = 'TEST_NULL';
+        $name = 'TESTGET_NULL';
         $this->putEnv($name . '=null');
         $expected = null;
         
@@ -171,7 +184,7 @@ class EnvTest extends TestCase
     public function testGet_nullTitlecase()
     {
         // Arrange
-        $name = 'TEST_NULL_TITLECASE';
+        $name = 'TESTGET_NULLTITLECASE';
         $this->putEnv($name . '=Null');
         $expected = null;
         
@@ -185,7 +198,7 @@ class EnvTest extends TestCase
     public function testGet_nullUppercase()
     {
         // Arrange
-        $name = 'TEST_NULL_UPPERCASE';
+        $name = 'TESTGET_NULLUPPERCASE';
         $this->putEnv($name . '=NULL');
         $expected = null;
         
@@ -199,7 +212,7 @@ class EnvTest extends TestCase
     public function testGet_true()
     {
         // Arrange
-        $name = 'TEST_TRUE';
+        $name = 'TESTGET_TRUE';
         $this->putEnv($name . '=true');
         $expected = true;
         
@@ -213,7 +226,7 @@ class EnvTest extends TestCase
     public function testGet_trueTitlecase()
     {
         // Arrange
-        $name = 'TEST_TRUE_TITLECASE';
+        $name = 'TESTGET_TRUETITLECASE';
         $this->putEnv($name . '=True');
         $expected = true;
         
@@ -227,7 +240,7 @@ class EnvTest extends TestCase
     public function testGet_trueUppercase()
     {
         // Arrange
-        $name = 'TEST_TRUE_UPPERCASE';
+        $name = 'TESTGET_TRUEUPPERCASE';
         $this->putEnv($name . '=TRUE');
         $expected = true;
         
@@ -238,10 +251,10 @@ class EnvTest extends TestCase
         $this->assertSame($expected, $actual);
     }
     
-    public function testRequireEnv_existsOK()
+    public function testRequireEnv_exists()
     {
         // Arrange
-        $varname = 'TEST_REQUIREENV_EXISTSOK';
+        $varname = 'TESTREQUIREENV_EXISTS';
         $this->putEnv($varname . '=exists');
         $expected = 'exists';
         
@@ -252,18 +265,197 @@ class EnvTest extends TestCase
         $this->assertSame($expected, $actual);
     }
     
-    public function testRequireEnv_throwsException()
+    public function testRequireEnv_notfound()
     {
         // Arrange
-        $varname = 'TEST_REQUIREENV_EXCEPTION';
-        // didn't putEnv($varname), so it should throw Exception
-        // $this->putEnv($varname . '=');
-        $expected = '';
+        $varname = 'TESTREQUIREENV_NOTFOUND';
+        
+        // Actual
+        $this->expectException(EnvVarNotFoundException::class);
+        Env::requireEnv($varname);
+
+        // Assert
+        $this->fail("Should have thrown EnvVarNotFoundException.");
+    }
+    
+    public function testRequireEnv_empty()
+    {
+        // Arrange
+        $varname = 'TESTREQUIREENV_EMPTY';
+        $this->putEnv($varname . '=');
         
         // Actual
         $this->expectException(EnvVarNotFoundException::class);
 
-        $actual = Env::requireEnv($varname);
+        Env::requireEnv($varname);
+
+        // Assert
+        $this->fail("Should have thrown EnvVarNotFoundException.");
+    }
+   
+    public function testGetArray_notFoundExists()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_NOTFOUNDEXISTS';
+        $expected = [];
+        
+        // Actual
+        $actual = Env::getArray($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArray_0exists()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_0EXISTS';
+        $this->putEnv($varname . '=');
+        $expected = [''];
+        
+        // Actual
+        $actual = Env::getArray($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArray_1exists()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_1EXISTS';
+        $this->putEnv($varname . '=a');
+        $expected = ['a'];
+        
+        // Actual
+        $actual = Env::getArray($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArray_multiExists()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_MULTIEXISTS';
+        $this->putEnv($varname . '=a,b,c');
+        $expected = ['a', 'b', 'c'];
+        
+        // Actual
+        $actual = Env::getArray($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArray_multiEmptyExists()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_MULTIEMPTYEXISTS';
+        $this->putEnv($varname . '=a,b,,,c');
+        $expected = ['a', 'b', '', '', 'c'];
+        
+        // Actual
+        $actual = Env::getArray($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArray_existsWithDefault()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_EXISTSWITHDEFAULT';
+        $this->putEnv($varname . '=a,b,c');
+        $default = ['x', 'y', 'z'];
+        $expected = ['a', 'b', 'c'];
+        
+        // Actual
+        $actual = Env::getArray($varname, $default);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArray_notFoundWithDefault()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_NOTFOUNDWITHDEFAULT';
+        $default = ['x', 'y', 'z'];
+        $expected = ['x', 'y', 'z'];
+        
+        // Actual
+        $actual = Env::getArray($varname, $default);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArray_existsWithInvalidDefaultType()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_EXISTSWITHINVALIDDEFAULTTYPE';
+        $this->putEnv($varname . '=a,b,c');
+        $default = 'x,y,z';
+        
+        // Actual
+        $this->expectException(\TypeError::class);
+        Env::getArray($varname, $default);
+
+        // Assert
+        $this->fail("Should have thrown TypeError on default array.");
+    }
+    
+    public function testGetArray_notFoundWithInvalidDefaultType()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_EXISTSWITHINVALIDDEFAULTTYPE';
+        $default = 'x,y,z';
+        
+        // Actual
+        $this->expectException(\TypeError::class);
+        Env::getArray($varname, $default);
+
+        // Assert
+        $this->fail("Should have thrown TypeError on default array.");
+    }
+    
+    public function testRequireArray_exists()
+    {
+        // Arrange
+        $varname = 'TESTREQUIREARRAY_EXISTS';
+        $this->putEnv($varname . '=a,b,c');
+        $expected = ['a', 'b', 'c'];
+        
+        // Actual
+        $actual = Env::requireArray($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testRequireArray_notfound()
+    {
+        // Arrange
+        $varname = 'TESTREQUIREARRAY_NOTFOUND';
+        
+        // Actual
+        $this->expectException(EnvVarNotFoundException::class);
+        Env::requireEnv($varname);
+
+        // Assert
+        $this->fail("Should have thrown EnvVarNotFoundException.");
+    }
+    
+    public function testRequireArray_empty()
+    {
+        // Arrange
+        $varname = 'TESTREQUIREARRAY_EMPTY';
+        $this->putEnv($varname . '=');
+        
+        // Actual
+        $this->expectException(EnvVarNotFoundException::class);
+        Env::requireArray($varname);
 
         // Assert
         $this->fail("Should have thrown EnvVarNotFoundException.");

@@ -47,27 +47,53 @@ class Env
         }
     }
     
+    /**
+     * 
+     * @param string $varname
+     * @return string
+     * @throws EnvVarNotFoundException
+     */
     public static function requireEnv($varname)
     {
-        $originalValue = Env::get($varname);
+        $value = Env::get($varname);
         
-        if ($originalValue === null) {
+        if ($value === null) {
             $message = "Required environment variable: $varname, not found.";
+            throw new EnvVarNotFoundException($message);
+        } elseif ($value === '') {
+            $message = "Required environment variable: $varname, cannot be empty.";
             throw new EnvVarNotFoundException($message);
         }
         
-        return $originalValue;
+        return $value;
     }
     
-    public static function getArray($varname, $default = null)
+    /**
+     * 
+     * @param string $varname
+     * @param array $default
+     * @return array
+     */
+    public static function getArray($varname, array $default = [])
     {
-        // TODO
+        $value = Env::get($varname);
         
+        if ($value === null) {
+            return $default;
+        }
+        
+        return explode(',', $value);
     }
     
+    /**
+     * 
+     * @param string $varname
+     * @return array
+     */
     public static function requireArray($varname)
     {
-        // TODO
+        Env::requireEnv($varname);
         
+        return Env::getArray($varname);
     }
 }
