@@ -55,13 +55,13 @@ class Env
      */
     public static function requireEnv($varname)
     {
-        $value = Env::get($varname);
+        $value = self::get($varname);
         
         if ($value === null) {
-            $message = "Required environment variable: $varname, not found.";
+            $message = "Required environment variable: " . $varname . ", not found.";
             throw new EnvVarNotFoundException($message);
         } elseif ($value === '') {
-            $message = "Required environment variable: $varname, cannot be empty.";
+            $message = "Required environment variable: " . $varname . ", cannot be empty.";
             throw new EnvVarNotFoundException($message);
         }
         
@@ -76,7 +76,7 @@ class Env
      */
     public static function getArray($varname, array $default = [])
     {
-        $value = Env::get($varname);
+        $value = self::get($varname);
         
         if ($value === null) {
             return $default;
@@ -92,8 +92,8 @@ class Env
      */
     public static function requireArray($varname)
     {
-        Env::requireEnv($varname);
+        self::requireEnv($varname);
         
-        return Env::getArray($varname);
+        return self::getArray($varname);
     }
 }
