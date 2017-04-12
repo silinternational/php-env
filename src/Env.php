@@ -1,8 +1,6 @@
 <?php
 namespace Sil\PhpEnv;
 
-use Sil\PhpEnv;
-
 class Env
 {
     /**
@@ -61,7 +59,7 @@ class Env
             $message = 'Required environment variable: ' . $varname . ', not found.';
             throw new EnvVarNotFoundException($message);
         } elseif ($value === '') {
-            $message = 'Required environment variable: ' . $varname . ', cannot be empty.';
+            $message = 'Required environment variable: ' . $varname . ', value cannot be empty.';
             throw new EnvVarNotFoundException($message);
         }
         
