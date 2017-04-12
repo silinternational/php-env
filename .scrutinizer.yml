@@ -126,3 +126,19 @@ build_failure_conditions:
 
     # Don't let Code Quality Rating drop below 6.
     - 'project.metric("scrutinizer.quality", < 6)'
+
+build:
+    environment:
+        php: 7.0.6
+        
+    dependencies:
+        before:
+            - composer install
+
+    tests:
+        override:
+            -
+                command: ./vendor/bin/phpunit --process-isolation --whitelist src/ --coverage-clover /tmp/coverage.xml tests/
+                coverage:
+                    file: /tmp/coverage.xml
+                    format: php-clover
