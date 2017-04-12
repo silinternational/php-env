@@ -32,11 +32,11 @@ class EnvTest extends TestCase
     public function testGet_notFoundNull()
     {
         // Arrange
-        $name = 'TESTGET_NOTFOUNDNULL';
+        $varname = 'TESTGET_NOTFOUNDNULL';
         $expected = null;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -45,12 +45,40 @@ class EnvTest extends TestCase
     public function testGet_emptyString()
     {
         // Arrange
-        $name = 'TESTGET_EMPTYSTRING';
-        $this->putEnv($name . '=');
+        $varname = 'TESTGET_EMPTYSTRING';
+        $this->putEnv($varname . '=');
         $expected = '';
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGet_spacesString()
+    {
+        // Arrange
+        $varname = 'TESTGET_SPACESSTRING';
+        $this->putEnv($varname . '=     ');
+        $expected = '';
+        
+        // Act
+        $actual = Env::get($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGet_whiteSpaceString()
+    {
+        // Arrange
+        $varname = 'TESTGET_WHITESPACESSTRING';
+        $this->putEnv($varname . '= Some whitespace    ');
+        $expected = 'Some whitespace';
+        
+        // Act
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -59,12 +87,12 @@ class EnvTest extends TestCase
     public function testGet_false()
     {
         // Arrange
-        $name = 'TESTGET_FALSE';
-        $this->putEnv($name . '=false');
+        $varname = 'TESTGET_FALSE';
+        $this->putEnv($varname . '=false');
         $expected = false;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -73,12 +101,12 @@ class EnvTest extends TestCase
     public function testGet_falseTitlecase()
     {
         // Arrange
-        $name = 'TESTGET_FALSETITLECASE';
-        $this->putEnv($name . '=False');
+        $varname = 'TESTGET_FALSETITLECASE';
+        $this->putEnv($varname . '=False');
         $expected = false;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -87,12 +115,12 @@ class EnvTest extends TestCase
     public function testGet_falseUppercase()
     {
         // Arrange
-        $name = 'TESTGET_FALSEUPPERCASE';
-        $this->putEnv($name . '=FALSE');
+        $varname = 'TESTGET_FALSEUPPERCASE';
+        $this->putEnv($varname . '=FALSE');
         $expected = false;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -101,12 +129,12 @@ class EnvTest extends TestCase
     public function testGet_nonEmptyLowercaseString()
     {
         // Arrange
-        $name = 'TESTGET_NONEMPTYLOWERCASESTRING';
-        $this->putEnv($name . '=abc123');
+        $varname = 'TESTGET_NONEMPTYLOWERCASESTRING';
+        $this->putEnv($varname . '=abc123');
         $expected = 'abc123';
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -115,12 +143,12 @@ class EnvTest extends TestCase
     public function testGet_nonEmptyMixedCaseString()
     {
         // Arrange
-        $name = 'TESTGET_NONEMPTYMIXEDCASESTRING';
-        $this->putEnv($name . '=aBc123');
+        $varname = 'TESTGET_NONEMPTYMIXEDCASESTRING';
+        $this->putEnv($varname . '=aBc123');
         $expected = 'aBc123';
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -129,12 +157,12 @@ class EnvTest extends TestCase
     public function testGet_nonEmptyUppercaseString()
     {
         // Arrange
-        $name = 'TESTGET_NONEMPTYUPPERCASESTRING';
-        $this->putEnv($name . '=ABC123');
+        $varname = 'TESTGET_NONEMPTYUPPERCASESTRING';
+        $this->putEnv($varname . '=ABC123');
         $expected = 'ABC123';
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -143,12 +171,12 @@ class EnvTest extends TestCase
     public function testGet_notSetHasDefault()
     {
         // Arrange
-        $name = 'TESTGET_NOTSETHASDEFAULT';
+        $varname = 'TESTGET_NOTSETHASDEFAULT';
         $default = 'some default value';
         $expected = 'some default value';
         
         // Act
-        $actual = Env::get($name, $default);
+        $actual = Env::get($varname, $default);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -157,11 +185,11 @@ class EnvTest extends TestCase
     public function testGet_notSetNoDefault()
     {
         // Arrange
-        $name = 'TESTGET_NOTSETNODEFAULT';
+        $varname = 'TESTGET_NOTSETNODEFAULT';
         $expected = null;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -170,12 +198,12 @@ class EnvTest extends TestCase
     public function testGet_null()
     {
         // Arrange
-        $name = 'TESTGET_NULL';
-        $this->putEnv($name . '=null');
+        $varname = 'TESTGET_NULL';
+        $this->putEnv($varname . '=null');
         $expected = null;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -184,12 +212,12 @@ class EnvTest extends TestCase
     public function testGet_nullTitlecase()
     {
         // Arrange
-        $name = 'TESTGET_NULLTITLECASE';
-        $this->putEnv($name . '=Null');
+        $varname = 'TESTGET_NULLTITLECASE';
+        $this->putEnv($varname . '=Null');
         $expected = null;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -198,12 +226,12 @@ class EnvTest extends TestCase
     public function testGet_nullUppercase()
     {
         // Arrange
-        $name = 'TESTGET_NULLUPPERCASE';
-        $this->putEnv($name . '=NULL');
+        $varname = 'TESTGET_NULLUPPERCASE';
+        $this->putEnv($varname . '=NULL');
         $expected = null;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -212,12 +240,12 @@ class EnvTest extends TestCase
     public function testGet_true()
     {
         // Arrange
-        $name = 'TESTGET_TRUE';
-        $this->putEnv($name . '=true');
+        $varname = 'TESTGET_TRUE';
+        $this->putEnv($varname . '=true');
         $expected = true;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -226,12 +254,12 @@ class EnvTest extends TestCase
     public function testGet_trueTitlecase()
     {
         // Arrange
-        $name = 'TESTGET_TRUETITLECASE';
-        $this->putEnv($name . '=True');
+        $varname = 'TESTGET_TRUETITLECASE';
+        $this->putEnv($varname . '=True');
         $expected = true;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -240,12 +268,12 @@ class EnvTest extends TestCase
     public function testGet_trueUppercase()
     {
         // Arrange
-        $name = 'TESTGET_TRUEUPPERCASE';
-        $this->putEnv($name . '=TRUE');
+        $varname = 'TESTGET_TRUEUPPERCASE';
+        $this->putEnv($varname . '=TRUE');
         $expected = true;
         
         // Act
-        $actual = Env::get($name);
+        $actual = Env::get($varname);
 
         // Assert
         $this->assertSame($expected, $actual);

@@ -32,7 +32,7 @@ class Env
             return $default;
         }
         
-        $lowercasedValue = strtolower($originalValue);
+        $lowercasedValue = strtolower(trim($originalValue));
         
         if ($lowercasedValue === 'false') {
             return false;
@@ -40,9 +40,9 @@ class Env
             return true;
         } elseif ($lowercasedValue === 'null') {
             return null;
-        } else {
-            return $originalValue;
         }
+        
+        return \trim($originalValue);
     }
     
     /**
