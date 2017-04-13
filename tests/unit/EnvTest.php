@@ -286,7 +286,7 @@ class EnvTest extends TestCase
         $this->putEnv($varname . '=exists');
         $expected = 'exists';
         
-        // Actual
+        // Act
         $actual = Env::requireEnv($varname);
 
         // Assert
@@ -298,7 +298,7 @@ class EnvTest extends TestCase
         // Arrange
         $varname = 'TESTREQUIREENV_NOTFOUND';
         
-        // Actual
+        // Act
         $this->expectException(EnvVarNotFoundException::class);
         Env::requireEnv($varname);
 
@@ -312,7 +312,7 @@ class EnvTest extends TestCase
         $varname = 'TESTREQUIREENV_EMPTY';
         $this->putEnv($varname . '=');
         
-        // Actual
+        // Act
         $this->expectException(EnvVarNotFoundException::class);
 
         Env::requireEnv($varname);
@@ -327,7 +327,7 @@ class EnvTest extends TestCase
         $varname = 'TESTGETARRAY_NOTFOUNDEXISTS';
         $expected = [];
         
-        // Actual
+        // Act
         $actual = Env::getArray($varname);
 
         // Assert
@@ -341,7 +341,7 @@ class EnvTest extends TestCase
         $this->putEnv($varname . '=');
         $expected = [''];
         
-        // Actual
+        // Act
         $actual = Env::getArray($varname);
 
         // Assert
@@ -355,7 +355,7 @@ class EnvTest extends TestCase
         $this->putEnv($varname . '=a');
         $expected = ['a'];
         
-        // Actual
+        // Act
         $actual = Env::getArray($varname);
 
         // Assert
@@ -369,7 +369,7 @@ class EnvTest extends TestCase
         $this->putEnv($varname . '=a,b,c');
         $expected = ['a', 'b', 'c'];
         
-        // Actual
+        // Act
         $actual = Env::getArray($varname);
 
         // Assert
@@ -383,7 +383,7 @@ class EnvTest extends TestCase
         $this->putEnv($varname . '=a,b,,,c');
         $expected = ['a', 'b', '', '', 'c'];
         
-        // Actual
+        // Act
         $actual = Env::getArray($varname);
 
         // Assert
@@ -398,7 +398,7 @@ class EnvTest extends TestCase
         $default = ['x', 'y', 'z'];
         $expected = ['a', 'b', 'c'];
         
-        // Actual
+        // Act
         $actual = Env::getArray($varname, $default);
 
         // Assert
@@ -412,7 +412,7 @@ class EnvTest extends TestCase
         $default = ['x', 'y', 'z'];
         $expected = ['x', 'y', 'z'];
         
-        // Actual
+        // Act
         $actual = Env::getArray($varname, $default);
 
         // Assert
@@ -426,7 +426,7 @@ class EnvTest extends TestCase
         $this->putEnv($varname . '=a,b,c');
         $default = 'x,y,z';
         
-        // Actual
+        // Act
         $this->expectException(\TypeError::class);
         Env::getArray($varname, $default);
 
@@ -440,7 +440,7 @@ class EnvTest extends TestCase
         $varname = 'TESTGETARRAY_EXISTSWITHINVALIDDEFAULTTYPE';
         $default = 'x,y,z';
         
-        // Actual
+        // Act
         $this->expectException(\TypeError::class);
         Env::getArray($varname, $default);
 
@@ -455,7 +455,7 @@ class EnvTest extends TestCase
         $this->putEnv($varname . '=a,b,c');
         $expected = ['a', 'b', 'c'];
         
-        // Actual
+        // Act
         $actual = Env::requireArray($varname);
 
         // Assert
@@ -467,7 +467,7 @@ class EnvTest extends TestCase
         // Arrange
         $varname = 'TESTREQUIREARRAY_NOTFOUND';
         
-        // Actual
+        // Act
         $this->expectException(EnvVarNotFoundException::class);
         Env::requireEnv($varname);
 
@@ -481,7 +481,7 @@ class EnvTest extends TestCase
         $varname = 'TESTREQUIREARRAY_EMPTY';
         $this->putEnv($varname . '=');
         
-        // Actual
+        // Act
         $this->expectException(EnvVarNotFoundException::class);
         Env::requireArray($varname);
 
