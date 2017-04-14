@@ -1,11 +1,7 @@
 # Sil/PhpEnv/
 
 PHP utility class `Env` plus `EnvVarNotFoundException` for working with environment variables that handles 
-<<<<<<< HEAD
 'true', 'false', and 'null' more intelligently, required variable names, and returning a list of values as a php array.
-=======
-'true', 'false', and 'null' more intelligently, required variable names, and converting a list of values into a php array.
->>>>>>> 769f692aeb8f10e8bba1a70d52a43eeac945f59f
 
 ## Build Status
 
@@ -24,17 +20,12 @@ PHP utility class `Env` plus `EnvVarNotFoundException` for working with environm
 1. Run `make test` to install dependencies and run phpunit tests
    
 ### Makefile script
-<<<<<<< HEAD
-There is a Makefile.
-=======
-There is a Makefile in place.
->>>>>>> 769f692aeb8f10e8bba1a70d52a43eeac945f59f
 
+There is a Makefile in place.
 - `make test` - does `composer install` and runs phpunit tests
 
 ## Classes in Sil/PhpEnv namespace
 
-<<<<<<< HEAD
 1. __Env__ `use Sil\PhpEnv\Env;`
 1. __EnvVarNotFoundException__ `use Sil\PhpEnv\EnvVarNotFoundException;`
 
@@ -45,49 +36,37 @@ There is a Makefile in place.
     * if `$varname` is not set or the value is empty (only whitespace), `get` returns `$default` parameter
     * if the value string corresponding to `$varname` is 'true', 'false' or 'null', `get` returns 
 php values of `true`, `false`, or `null` respectively
-    * NOTE: Any value string containing 'true' with any combination of case and/or leading/trailing whitespace still returns php `true`. 
+    * NOTE: Any value string containing 'true' with any combination of case and/or leading/trailing whitespace still returns php `true`.  
 `false` and `null` are handled similarly.
 
 1. __getArray__ `public static function getArray($varname, array $default = [])`
     * searches the local environment for `$varname` and returns the corresponding value string with comma separated elements as a php array
     * if `$varname` is not set or the value is empty (only whitespace), `getArray` returns `$default` parameter which must be an array
+    * if $default is not an array, it throws a `TypeError` exception
 
 1. __requireEnv__ `public static function requireEnv($varname)`
-    * throws `EnvVarNotFoundException` if `$varname` is not set or corresponding value string is empty (only whitespace)
-    * //TODO//
+    * searches the local environment for `$varname` and returns the corresponding value string
+    * if `$varname` is not set or the value is empty (only whitespace), it throws `EnvVarNotFoundException`
+    * 'true', 'false', and 'null' are handled the same as `get()`
 
 1. __requireArray__ `public static function requireArray($varname)`
-    * throws `EnvVarNotFoundException` if `$varname` is not set or corresponding value string is empty (only whitespace)
+    * searches the local environment for `$varname` and returns the corresponding value string with comma separated elements as a php array
+    * if `$varname` is not set or the value is empty (only whitespace), it throws `EnvVarNotFoundException`
 
 ### Class `EnvVarNotFoundException`
 
 `class EnvVarNotFoundException extends \Exception`
 
 `EnvVarNotFoundException` is thrown by `requireEnv()` and `requireArray()` when `$varname` is not found in the local
-environment or the corresponding value string is empty (only whitespace).
+environment or the corresponding value string is empty (only whitespace)
 
-## `Env` example function calls
+## `Env` example function calls //TODO//
 
-### Example local.env file
+1. `public static function get($varname, $default = null)`
 
-### Example function calls
-=======
-1. Env - `use Sil\PhpEnv\Env;`
-1. EnvVarNotFoundException - `use Sil\PhpEnv\EnvVarNotFoundException;`
+1. `public static function requireEnv($varname)`
 
-### Summary of `Env` functions
+1. `public static function getArray($varname, array $default = [])`
 
-1. `public static function *get*($varname, $default = null)`
-..* searches the local environment for `$varname` and returns the corresponding value string
-..* if `$varname` is not set or the value is empty (only whitespace), `get returns `$default` parameter
-..* if the value string corresponding to `$varname` is 'true', 'false' or 'null', `get` returns php values of `true`, `false`, or `null`
-..* NOTE: Any value string containing 'true' with any combination of case and/or leading/trailing whitespace still returns php `true`.  
-`false` and `null` are handled similarly.
-
-1. `public static function *requireEnv*($varname)`
-
-1. `public static function *getArray*($varname, array $default = [])`
-
-1. `public static function *requireArray*($varname)`
->>>>>>> 769f692aeb8f10e8bba1a70d52a43eeac945f59f
+1. `public static function requireArray($varname)`
 
