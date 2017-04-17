@@ -90,38 +90,38 @@ ___
 
 * **get** - `public static function get($varname, $default = null)`
 
-  1. `Env::get('NOTFOUND')` - returns `null`
-  1. `Env::get('NOTFOUND', 'bad data')` - returns `'bad data'`
-  1. `Env::get('EMPTY')` - returns `''`
-  1. `Env::get('SPACES')` - returns `''`
-  1. `Env::get('WHITESPACE')` - returns `'Some whitespace'`
-  1. `Env::get('FALSE')` - returns `false`
-  1. `Env::get('TRUE')` - returns `true`
-  1. `Env::get('NULL')` - returns `null`
-  1. `Env::get('LOWERCASE')` - returns `'abc123'`
-  1. `Env::get('UPPERCASE')` - returns `'ABC123'`
+    1. `Env::get('NOTFOUND')` - returns `null`
+    1. `Env::get('NOTFOUND', 'bad data')` - returns `'bad data'`
+    1. `Env::get('EMPTY')` - returns `''`
+    1. `Env::get('SPACES')` - returns `''`
+    1. `Env::get('WHITESPACE')` - returns `'Some whitespace'`
+    1. `Env::get('FALSE')` - returns `false`
+    1. `Env::get('TRUE')` - returns `true`
+    1. `Env::get('NULL')` - returns `null`
+    1. `Env::get('LOWERCASE')` - returns `'abc123'`
+    1. `Env::get('UPPERCASE')` - returns `'ABC123'`
 
 * **requireEnv** - `public static function requireEnv($varname)`
 
-  1. `Env::requireEnv('NOTFOUND')` - throws `EnvVarNotFoundException`
-  1. `Env::requireEnv('EMPTY')` - throws `EnvVarNotFoundException`
-  1. `Env::requireEnv('WHITESPACE')` - returns `'Some whitespace'`
-  1. `Env::requireEnv('FALSE')` - returns `false`
-  1. `Env::requireEnv('LOWERCASE')` - returns `'abc123'`
+    1. `Env::requireEnv('NOTFOUND')` - throws `EnvVarNotFoundException`
+    1. `Env::requireEnv('EMPTY')` - throws `EnvVarNotFoundException`
+    1. `Env::requireEnv('WHITESPACE')` - returns `'Some whitespace'`
+    1. `Env::requireEnv('FALSE')` - returns `false`
+    1. `Env::requireEnv('LOWERCASE')` - returns `'abc123'`
 
 * **getArray** - `public static function getArray($varname, array $default = [])`
 
-  1. `Env::getArray('NOTFOUND')` - returns `[]`
-  1. `Env::getArray('NOTFOUND', ['one', 'two'])` - returns `['one', 'two']`
-  1. `Env::getArray('NOTFOUND', 'one,two,three')` - throws `TypeError` exception
-  1. `Env::getArray('ARRAY0')` - returns `['']`
-  1. `Env::getArray('ARRAY1')` - returns `['one']`
-  1. `Env::getArray('ARRAY')` - returns `['one', 'two', '', 'three']`
+    1. `Env::getArray('NOTFOUND')` - returns `[]`
+    1. `Env::getArray('NOTFOUND', ['one', 'two'])` - returns `['one', 'two']`
+    1. `Env::getArray('NOTFOUND', 'one,two,three')` - throws `TypeError` exception
+    1. `Env::getArray('ARRAY0')` - returns `['']`
+    1. `Env::getArray('ARRAY1')` - returns `['one']`
+    1. `Env::getArray('ARRAY')` - returns `['one', 'two', '', 'three']`
 
 * **requireArray** - `public static function requireArray($varname)`
 
-  1. `Env::requireArray('NOTFOUND')` - throws `EnvVarNotFoundException`
-  1. `Env::requireArray('EMPTY')` - throws `EnvVarNotFoundException`
-  1. `Env::requireArray('ARRAY1')` - returns `['one']`
-  1. `Env::requireArray('ARRAY')` - returns `['one', 'two', '', 'three']`
+    1. `Env::requireArray('NOTFOUND')` - throws `EnvVarNotFoundException`
+    1. `Env::requireArray('EMPTY')` - throws `EnvVarNotFoundException`
+    1. `Env::requireArray('ARRAY1')` - returns `['one']`
+    1. `Env::requireArray('ARRAY')` - returns `['one', 'two', '', 'three']`
 
