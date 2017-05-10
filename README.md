@@ -1,35 +1,32 @@
 # Sil/PhpEnv/
 
-PHP utility class `Env` plus `EnvVarNotFoundException` for working with environment variables that handles 
-'true', 'false', and 'null' more intelligently, required variable names, and returning a list of values as a php array.
+Simple PHP library for getting (or requiring) environment variables, designed 
+to handle `true`, `false`, and `null` more intelligently. If desired, an 
+environment variable's value can be split into an array automatically.
 
 ## Build Status
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silinternational/php-env/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/silinternational/php-env/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/silinternational/php-env/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/silinternational/php-env/build-status/master)
 
-## Dev Requirements
-
-1. php >= 5.3.3
-1. phpunit ^6.1
-
 ## Setup
 
-1. Clone this repo
-1. Copy `local.env.dist` to `local.env` and update github.com token as appropriate
-1. Run `make test` to install dependencies and run phpunit tests
+1. Clone this repo.
+1. Copy `local.env.dist` to `local.env` and update GitHub.com token as 
+   appropriate.
+1. Run `make test` to install dependencies and run PHPUnit tests.
    
 ### Makefile script
 
-There is a Makefile in place.
+There is a Makefile in place to simplify common tasks.
 - `make test` - does `composer install` and runs phpunit tests
 
 ___
 
 ## Classes in Sil/PhpEnv namespace
 
-1. __Env__ - `use Sil\PhpEnv\Env;`
-1. __EnvVarNotFoundException__ - `use Sil\PhpEnv\EnvVarNotFoundException;`
+1. __Env__: `use Sil\PhpEnv\Env;`
+2. __EnvVarNotFoundException__: `use Sil\PhpEnv\EnvVarNotFoundException;`
 
 ### Class `Env` summary of functions
 

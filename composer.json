@@ -6,7 +6,7 @@
         "psr-4": {"Sil\\PhpEnv\\": "src/"}
     },
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.4"
     },
     "require-dev": {
         "johnkary/phpunit-speedtrap": "1.*",
