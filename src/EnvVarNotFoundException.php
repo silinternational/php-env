@@ -11,5 +11,4 @@ namespace Sil\PhpEnv;
  */
 class EnvVarNotFoundException extends \Exception 
 {
-
 }
