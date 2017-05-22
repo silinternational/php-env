@@ -329,10 +329,10 @@ class EnvTest extends TestCase
         $this->fail("Should have thrown EnvVarNotFoundException.");
     }
    
-    public function testGetArray_notFoundExists()
+    public function testGetArray_notFound()
     {
         // Arrange
-        $varname = 'TESTGETARRAY_NOTFOUNDEXISTS';
+        $varname = 'TESTGETARRAY_NOTFOUND';
         $expected = [];
         
         // Act
@@ -342,10 +342,10 @@ class EnvTest extends TestCase
         $this->assertSame($expected, $actual);
     }
     
-    public function testGetArray_0exists()
+    public function testGetArray_existsButNoValue()
     {
         // Arrange
-        $varname = 'TESTGETARRAY_0EXISTS';
+        $varname = 'TESTGETARRAY_EXISTSBUTNOVALUE';
         $this->putEnv($varname . '=');
         $expected = [];
         
