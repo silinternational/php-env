@@ -14,13 +14,17 @@ class Env
      * is to check for that kind of string value and return the actual value
      * that it refers to.
      * 
-     * NOTE: If the specified environment variable is not set and no default
-     * value was provided, this function returns null (rather than returning
-     * false the way getenv() does).
+     * NOTE:
+     * - If no value is available for the specified environment variable and
+     *   no default value was provided, this function returns null (rather than
+     *   returning false the way getenv() does).
+     * - At version 2.0.0, this method was changed to return the given default
+     *   value even if the environment variable exists but has no value (or a
+     *   value that only contains whitespace).
      * 
      * @param string $varname The name of the desired environment variable.
-     * @param mixed $default The default value to return if no such environment
-     *     variable exists.
+     * @param mixed $default The default value to return if no value was
+     *     provided for the specified environment variable.
      * @return mixed The resulting value (if set), or the given default value
      *     (if any, otherwise null).
      */
