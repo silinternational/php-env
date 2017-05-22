@@ -47,13 +47,17 @@ class EnvTest extends TestCase
         // Arrange
         $varname = 'TESTGET_EMPTYSTRING';
         $this->putEnv($varname . '=');
-        $expected = '';
+        $expected = null;
         
         // Act
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertSame(
+            $expected,
+            $actual,
+            'Expected to get the default value if only whitespace was found.'
+        );
     }
     
     public function testGet_spacesString()
@@ -61,13 +65,17 @@ class EnvTest extends TestCase
         // Arrange
         $varname = 'TESTGET_SPACESSTRING';
         $this->putEnv($varname . '=     ');
-        $expected = '';
+        $expected = null;
         
         // Act
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertSame(
+            $expected,
+            $actual,
+            'Expected to get the default value if only whitespace was found.'
+        );
     }
     
     public function testGet_whiteSpaceString()
@@ -321,10 +329,10 @@ class EnvTest extends TestCase
         $this->fail("Should have thrown EnvVarNotFoundException.");
     }
    
-    public function testGetArray_notFoundExists()
+    public function testGetArray_notFound()
     {
         // Arrange
-        $varname = 'TESTGETARRAY_NOTFOUNDEXISTS';
+        $varname = 'TESTGETARRAY_NOTFOUND';
         $expected = [];
         
         // Act
@@ -334,15 +342,30 @@ class EnvTest extends TestCase
         $this->assertSame($expected, $actual);
     }
     
-    public function testGetArray_0exists()
+    public function testGetArray_existsButNoValue()
     {
         // Arrange
-        $varname = 'TESTGETARRAY_0EXISTS';
+        $varname = 'TESTGETARRAY_EXISTSBUTNOVALUE';
         $this->putEnv($varname . '=');
-        $expected = [''];
+        $expected = [];
         
         // Act
         $actual = Env::getArray($varname);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArray_existsButNoValueHasDefault()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_EXISTSBUTNOVALUEHASDEFAULT';
+        $this->putEnv($varname . '=');
+        $default = ['x', 'y', 'z'];
+        $expected = ['x', 'y', 'z'];
+        
+        // Act
+        $actual = Env::getArray($varname, $default);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -480,6 +503,34 @@ class EnvTest extends TestCase
         // Arrange
         $varname = 'TESTREQUIREARRAY_EMPTY';
         $this->putEnv($varname . '=');
+        
+        // Act
+        $this->expectException(EnvVarNotFoundException::class);
+        Env::requireArray($varname);
+
+        // Assert
+        $this->fail("Should have thrown EnvVarNotFoundException.");
+    }
+    
+    public function testRequireArray_onlySingleSpace()
+    {
+        // Arrange
+        $varname = 'TESTREQUIREARRAY_ONLYSINGLESPACE';
+        $this->putEnv($varname . '=  ');
+        
+        // Act
+        $this->expectException(EnvVarNotFoundException::class);
+        Env::requireArray($varname);
+
+        // Assert
+        $this->fail("Should have thrown EnvVarNotFoundException.");
+    }
+    
+    public function testRequireArray_onlyWhitespace()
+    {
+        // Arrange
+        $varname = 'TESTREQUIREARRAY_ONLYWHITESPACE';
+        $this->putEnv($varname . "=  \t ");
         
         // Act
         $this->expectException(EnvVarNotFoundException::class);
