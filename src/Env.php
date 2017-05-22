@@ -36,17 +36,23 @@ class Env
             return $default;
         }
         
-        $lowercasedValue = strtolower(trim($originalValue));
+        $trimmedValue = \trim($originalValue);
         
-        if ($lowercasedValue === 'false') {
+        if ($trimmedValue === '') {
+            return $default;
+        }
+        
+        $lowercasedTrimmedValue = \strtolower($trimmedValue);
+        
+        if ($lowercasedTrimmedValue === 'false') {
             return false;
-        } elseif ($lowercasedValue === 'true') {
+        } elseif ($lowercasedTrimmedValue === 'true') {
             return true;
-        } elseif ($lowercasedValue === 'null') {
+        } elseif ($lowercasedTrimmedValue === 'null') {
             return null;
         }
         
-        return \trim($originalValue);
+        return $trimmedValue;
     }
     
     /**
