@@ -1,5 +1,6 @@
 {
     "name": "silinternational/php-env",
+    "description": "Simple PHP library for getting (or requiring) environment variables, designed to handle true, false, and null more intelligently. If desired, an environment variable's value can be split into an array automatically.",
     "type": "library",
     "license": "MIT",
     "autoload": {
