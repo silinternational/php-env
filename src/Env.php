@@ -23,10 +23,10 @@ class Env
      *   value that only contains whitespace).
      * 
      * @param string $varname The name of the desired environment variable.
-     * @param mixed $default The default value to return if no value was
-     *     provided for the specified environment variable.
-     * @return mixed The resulting value (if set), or the given default value
-     *     (if any, otherwise null).
+     * @param mixed $default The default value to return if the environment
+     *     variable is not set or its value only contains whitespace.
+     * @return mixed The resulting value (if set to more than whitespace), or
+     *     the given default value (if any, otherwise null).
      */
     public static function get($varname, $default = null)
     {
