@@ -3,6 +3,7 @@ namespace Sil\PhpEnv\tests;
 
 use PHPUnit\Framework\TestCase;
 use Sil\PhpEnv\Env;
+use Sil\PhpEnv\EnvListNotAvailableException;
 use Sil\PhpEnv\EnvVarNotFoundException;
 
 class EnvTest extends TestCase
@@ -469,6 +470,71 @@ class EnvTest extends TestCase
 
         // Assert
         $this->fail("Should have thrown TypeError on default array.");
+    }
+    
+    public function testGetArrayFromPrefix_multiple()
+    {
+        // Arrange
+        $prefix = 'TESTGETARRAYFROMPREFIX_MULTIPLE_';
+        $this->putEnv($prefix . 'firstOne=abc');
+        $this->putEnv($prefix . 'secondProperty=true');
+        $this->putEnv($prefix . 'aThird=false');
+        $this->putEnv($prefix . 'fourthOne=null');
+        $this->putEnv($prefix . 'andAFifth=123');
+        $expected = [
+            'firstOne' => 'abc',
+            'secondProperty' => true,
+            'aThird' => false,
+            'fourthOne' => null,
+            'andAFifth' => '123',
+        ];
+        
+        // Act
+        try {
+            $actual = Env::getArrayFromPrefix($prefix);
+        } catch (EnvListNotAvailableException $e) {
+            $this->markTestSkipped('Skipping test: ' . $e->getMessage());
+        }
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArrayFromPrefix_notFound()
+    {
+        // Arrange
+        $prefix = 'TESTGETARRAYFROMPREFIX_NOTFOUND_';
+        $expected = [];
+        
+        // Act
+        try {
+            $actual = Env::getArrayFromPrefix($prefix);
+        } catch (EnvListNotAvailableException $e) {
+            $this->markTestSkipped('Skipping test: ' . $e->getMessage());
+        }
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArrayFromPrefix_one()
+    {
+        // Arrange
+        $prefix = 'TESTGETARRAYFROMPREFIX_ONE_';
+        $this->putEnv($prefix . 'onlyOne=something');
+        $expected = [
+            'onlyOne' => 'something',
+        ];
+        
+        // Act
+        try {
+            $actual = Env::getArrayFromPrefix($prefix);
+        } catch (EnvListNotAvailableException $e) {
+            $this->markTestSkipped('Skipping test: ' . $e->getMessage());
+        }
+
+        // Assert
+        $this->assertSame($expected, $actual);
     }
     
     public function testRequireArray_exists()
