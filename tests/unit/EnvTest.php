@@ -471,6 +471,59 @@ class EnvTest extends TestCase
         $this->fail("Should have thrown TypeError on default array.");
     }
     
+    public function testGetArrayFromPrefix_multiple()
+    {
+        // Arrange
+        $prefix = 'TESTGETARRAYFROMPREFIX_MULTIPLE_';
+        $this->putEnv($prefix . 'firstOne=abc');
+        $this->putEnv($prefix . 'secondProperty=true');
+        $this->putEnv($prefix . 'aThird=false');
+        $this->putEnv($prefix . 'fourthOne=null');
+        $this->putEnv($prefix . 'andAFifth=123');
+        $expected = [
+            'firstOne' => 'abc',
+            'secondProperty' => true,
+            'aThird' => false,
+            'fourthOne' => null,
+            'andAFifth' => '123',
+        ];
+        
+        // Act
+        $actual = Env::getArrayFromPrefix($prefix);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArrayFromPrefix_notFound()
+    {
+        // Arrange
+        $prefix = 'TESTGETARRAYFROMPREFIX_NOTFOUND_';
+        $expected = [];
+        
+        // Act
+        $actual = Env::getArrayFromPrefix($prefix);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
+    public function testGetArrayFromPrefix_one()
+    {
+        // Arrange
+        $prefix = 'TESTGETARRAYFROMPREFIX_ONE_';
+        $this->putEnv($prefix . 'onlyOne=something');
+        $expected = [
+            'onlyOne' => 'something',
+        ];
+        
+        // Act
+        $actual = Env::getArrayFromPrefix($prefix);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+    
     public function testRequireArray_exists()
     {
         // Arrange
