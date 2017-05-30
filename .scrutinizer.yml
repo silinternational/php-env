@@ -49,19 +49,17 @@ checks:
         no_short_variable_names:
             minimum: '3'
         no_short_method_names:
-            minimum: '4'
+            minimum: '3'
         no_goto: true
         newline_at_end_of_file: true
         naming_conventions:
             local_variable: '^[a-z][a-zA-Z0-9]*$'
-            abstract_class_name: ^Abstract|Factory$
-            utility_class_name: 'Utils?$'
             constant_name: '^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*$'
             property_name: '^[a-z][a-zA-Z0-9]*$'
             method_name: '^((?:[a-z]|__)[a-zA-Z0-9]*|test[A-Z][_a-zA-Z0-9]*)$'
             parameter_name: '^[a-z][a-zA-Z0-9]*$'
             interface_name: '^[A-Z][a-zA-Z0-9]*Interface$'
-            type_name: '^[A-Z][a-zA-Z0-9]*$'
+            type_name: '^(m[0-9a-z_]+|[A-Z][a-zA-Z0-9]*)$'
             exception_name: '^[A-Z][a-zA-Z0-9]*Exception$'
             isser_method_name: '^(?:is|can|has|should|may|supports)'
         more_specific_types_in_doc_comments: true
