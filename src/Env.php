@@ -1,6 +1,8 @@
 <?php
 namespace Sil\PhpEnv;
 
+use Exception;
+
 class Env
 {
     public static function assertEnvListAvailable()
@@ -117,15 +119,16 @@ class Env
      * converted to their non-string values. See Env::get().
      *
      * @param string $prefix The prefix to look for, in the list of defined
-     *     environment variables' names.
+     *     environment variables' names. Must not be empty.
      * @return array
+     * @throws Exception
      */
     public static function getArrayFromPrefix($prefix)
     {
         self::assertEnvListAvailable();
         
         if (empty($prefix)) {
-            throw new \Exception(
+            throw new Exception(
                 'You must provide a non-empty prefix to search for.',
                 1496164608
             );
