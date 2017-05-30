@@ -3,6 +3,7 @@ namespace Sil\PhpEnv\tests;
 
 use PHPUnit\Framework\TestCase;
 use Sil\PhpEnv\Env;
+use Sil\PhpEnv\EnvListNotAvailableException;
 use Sil\PhpEnv\EnvVarNotFoundException;
 
 class EnvTest extends TestCase
@@ -489,7 +490,11 @@ class EnvTest extends TestCase
         ];
         
         // Act
-        $actual = Env::getArrayFromPrefix($prefix);
+        try {
+            $actual = Env::getArrayFromPrefix($prefix);
+        } catch (EnvListNotAvailableException $e) {
+            $this->markTestSkipped('Skipping test: ' . $e->getMessage());
+        }
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -502,7 +507,11 @@ class EnvTest extends TestCase
         $expected = [];
         
         // Act
-        $actual = Env::getArrayFromPrefix($prefix);
+        try {
+            $actual = Env::getArrayFromPrefix($prefix);
+        } catch (EnvListNotAvailableException $e) {
+            $this->markTestSkipped('Skipping test: ' . $e->getMessage());
+        }
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -518,7 +527,11 @@ class EnvTest extends TestCase
         ];
         
         // Act
-        $actual = Env::getArrayFromPrefix($prefix);
+        try {
+            $actual = Env::getArrayFromPrefix($prefix);
+        } catch (EnvListNotAvailableException $e) {
+            $this->markTestSkipped('Skipping test: ' . $e->getMessage());
+        }
 
         // Assert
         $this->assertSame($expected, $actual);
