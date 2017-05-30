@@ -2,15 +2,22 @@
 namespace Sil\PhpEnv;
 
 use Exception;
+use Sil\PhpEnv\EnvListNotAvailableException;
 
 class Env
 {
+    /**
+     * Throw an exception if we are not able to get the list of environment
+     * variables' names.
+     *
+     * @throws EnvListNotAvailableException
+     */
     public static function assertEnvListAvailable()
     {
         if (empty($_ENV)) {
             $variablesOrder = \ini_get('variables_order');
             if (strpos($variablesOrder, 'E') === false) {
-                throw new \Exception(
+                throw new EnvListNotAvailableException(
                     'Cannot get a list of the current environment variables. '
                     . 'Make sure the `variables_order` variable in php.ini '
                     . 'contains the letter "E".',
@@ -121,6 +128,7 @@ class Env
      * @param string $prefix The prefix to look for, in the list of defined
      *     environment variables' names. Must not be empty.
      * @return array
+     * @throws EnvListNotAvailableException
      * @throws Exception
      */
     public static function getArrayFromPrefix($prefix)
