@@ -39,6 +39,21 @@ php values of `true`, `false`, or `null` respectively
     * NOTE: Any value string containing 'true' with any combination of case and/or leading/trailing whitespace still returns php `true`.  
 `false` and `null` are handled similarly.  Other value strings will have leading/trailing whitespace trimmed.
 
+1. __getString__ - `public static function getString($varname, $default = null): ?string`
+
+    * searches the local environment for `$varname` and returns the corresponding trimmed value string
+    * if `$varname` is not set or the value is empty (only whitespace), `getString` returns `$default` parameter
+
+1. __getBoolean__ - `public static function getBoolean($varname, $default = null): ?bool`
+
+    * searches the local environment for `$varname` and returns the corresponding boolean value string
+    * if `$varname` is not set or the value is empty (only whitespace), `getBoolean` returns `$default` parameter
+    * if the value string corresponding to `$varname` is 'true', 'false' or 'null', `getBoolean` returns
+      php values of `true`, `false`, or `null` respectively
+    * if the value is not boolean, `getBoolean` returns `$default` parameter
+    * NOTE: Any value string containing 'true' with any combination of case and/or leading/trailing whitespace still returns php `true`.
+      `false` and `null` are handled similarly.
+
 1. __getArray__ - `public static function getArray($varname, array $default = [])`
 
     * searches the local environment for `$varname` and returns the corresponding value string with comma separated elements as a php array

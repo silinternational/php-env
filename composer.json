@@ -7,9 +7,9 @@
         "psr-4": {"Sil\\PhpEnv\\": "src/"}
     },
     "require": {
-        "php": "^7.2"
+        "php": "^7.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^9.0"
     }
 }
