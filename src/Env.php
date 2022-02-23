@@ -80,12 +80,17 @@ class Env
 
     public static function getString(string $varName, ?string $default = null): ?string
     {
-        $value = self::get($varName, $default);
-        if (is_string($value)) {
-            return $value;
-        } else {
-            return null;
+        $originalValue = \getenv($varName);
+        if ($originalValue === false) {
+            return $default;
         }
+
+        $trimmedValue = \trim($originalValue);
+        if ($trimmedValue === '') {
+            return $default;
+        }
+
+        return $trimmedValue;
     }
 
 
@@ -95,7 +100,7 @@ class Env
         if (is_bool($value)) {
             return $value;
         } else {
-            return null;
+            return $default;
         }
     }
 
