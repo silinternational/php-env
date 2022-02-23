@@ -1,0 +1,6 @@
+test:
+    image: silintl/php7:7.4
+    volumes:
+        - ./:/data
+    working_dir: /data
+

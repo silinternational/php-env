@@ -2,7 +2,6 @@
 namespace Sil\PhpEnv;
 
 use Exception;
-use Sil\PhpEnv\EnvListNotAvailableException;
 
 class Env
 {
@@ -78,7 +77,33 @@ class Env
         
         return $trimmedValue;
     }
-    
+
+    public static function getString(string $varName, ?string $default = null): ?string
+    {
+        $originalValue = \getenv($varName);
+        if ($originalValue === false) {
+            return $default;
+        }
+
+        $trimmedValue = \trim($originalValue);
+        if ($trimmedValue === '') {
+            return $default;
+        }
+
+        return $trimmedValue;
+    }
+
+
+    public static function getBoolean(string $varName, ?bool $default = null): ?bool
+    {
+        $value = self::get($varName, $default);
+        if (is_bool($value)) {
+            return $value;
+        } else {
+            return $default;
+        }
+    }
+
     /**
      * 
      * @param string $varname
