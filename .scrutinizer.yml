@@ -127,17 +127,24 @@ build_failure_conditions:
     - 'project.metric("scrutinizer.quality", < 6)'
 
 build:
-    environment:
-        php: 7.4.28
-        
-    dependencies:
-        before:
-            - composer install
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
 
-    tests:
-        override:
-            -
-                command: ./vendor/bin/phpunit --process-isolation --whitelist src/ --coverage-clover /tmp/coverage.xml tests/
-                coverage:
-                    file: /tmp/coverage.xml
-                    format: php-clover
+        tests-and-coverage:
+            environment:
+                php: 7.4.28
+                
+            dependencies:
+                before:
+                    - composer install
+        
+            tests:
+                override:
+                    -
+                        command: ./vendor/bin/phpunit --process-isolation --whitelist src/ --coverage-clover /tmp/coverage.xml tests/
+                        coverage:
+                            file: /tmp/coverage.xml
+                            format: php-clover
