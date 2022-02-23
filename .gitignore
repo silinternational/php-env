@@ -2,3 +2,4 @@ composer.phar
 /nbproject/
 /vendor/
 local.env
+composer.lock
