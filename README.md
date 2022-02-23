@@ -51,7 +51,7 @@ php values of `true`, `false`, or `null` respectively
     * if the value string corresponding to `$varname` is 'true', 'false' or 'null', `getBoolean` returns
       php values of `true`, `false`, or `null` respectively
     * if the value is not boolean, `getBoolean` returns `$default` parameter
-    * NOTE: Any value string containing 'true' with any combination of case and/or leading/trailing whitespace still returns php `true`.  
+    * NOTE: Any value string containing 'true' with any combination of case and/or leading/trailing whitespace still returns php `true`.
       `false` and `null` are handled similarly.
 
 1. __getArray__ - `public static function getArray($varname, array $default = [])`
