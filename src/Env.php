@@ -81,9 +81,7 @@ class Env
     public static function getString(string $varName, ?string $default = null): ?string
     {
         $value = self::get($varName, $default);
-        if ($value === null) {
-            return $value;
-        } elseif (is_string($value)) {
+        if (is_string($value)) {
             return $value;
         } else {
             return null;
@@ -94,9 +92,7 @@ class Env
     public static function getBoolean(string $varName, ?bool $default = null): ?bool
     {
         $value = self::get($varName, $default);
-        if ($value === null) {
-            return $value;
-        } elseif (is_bool($value)) {
+        if (is_bool($value)) {
             return $value;
         } else {
             return null;
