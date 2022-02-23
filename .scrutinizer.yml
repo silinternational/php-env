@@ -128,7 +128,7 @@ build_failure_conditions:
 
 build:
     environment:
-        php: 7.2.22
+        php: 7.4.28
         
     dependencies:
         before:
