@@ -78,42 +78,29 @@ class Env
         return $trimmedValue;
     }
 
-    public static function getString(string $varName): ?string
+    public static function getString(string $varName, ?string $default = null): ?string
     {
-        $originalValue = \getenv($varName);
-        if ($originalValue === false) {
+        $value = self::get($varName, $default);
+        if ($value === null) {
+            return $value;
+        } elseif (is_string($value)) {
+            return $value;
+        } else {
             return null;
         }
-        $trimmedValue = \trim($originalValue);
-        return $trimmedValue;
     }
 
 
-    public static function getBoolean(string $varName): ?bool
+    public static function getBoolean(string $varName, ?bool $default = null): ?bool
     {
-        $originalValue = \getenv($varName);
-        if ($originalValue === false) {
+        $value = self::get($varName, $default);
+        if ($value === null) {
+            return $value;
+        } elseif (is_bool($value)) {
+            return $value;
+        } else {
             return null;
         }
-        $trimmedValue = \trim($originalValue);
-        $loweredValue = \strtolower($trimmedValue);
-
-        $mapping = [
-            'no' => false,
-            'false' => false,
-            '0' => false,
-            'off' => false,
-            'yes' => true,
-            'true' => true,
-            '1' => true,
-            'on' => true,
-        ];
-        if (array_key_exists($loweredValue, $mapping)) {
-            $returnValue = $mapping[$loweredValue];
-        } else {
-            $returnValue = null;
-        }
-        return $returnValue;
     }
 
     /**
