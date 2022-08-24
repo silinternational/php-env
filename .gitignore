@@ -1,5 +1,6 @@
 composer.phar
 /nbproject/
 /vendor/
+.idea/
 local.env
 composer.lock
