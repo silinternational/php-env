@@ -1,5 +1,5 @@
 test:
-    image: silintl/php7:7.4
+    image: silintl/php8:8.1
     volumes:
         - ./:/data
     working_dir: /data
