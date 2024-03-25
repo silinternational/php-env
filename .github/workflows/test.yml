@@ -10,10 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: php-actions/composer@v6
-
-      - uses: php-actions/phpunit@v3
-        with:
-          version: 9
-          configuration: tests/phpunit.xml
-          args: --process-isolation
+      - run: make test
