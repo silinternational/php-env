@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: touch local.env
-
-      - run: make test
+      - name: Unit Tests
+        run: |
+          touch local.env
+          make test
