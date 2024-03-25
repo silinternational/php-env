@@ -10,4 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: make test
+      - uses: shivammathur/setup-php@v2
+        with:
+          ini-values: variables_order=EGPCS
+          tools: composer, phpunit
+          
+      - name: Unit Tests
+        run: |
+          composer install
+          ./vendor/bin/phpunit --process-isolation tests/
