@@ -6,8 +6,7 @@ environment variable's value can be split into an array automatically.
 
 ## Build Status
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silinternational/php-env/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/silinternational/php-env/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/silinternational/php-env/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/silinternational/php-env/build-status/master)
+![Unit Tests](https://github.com/silinternational/php-env/actions/workflows/tests.yml/badge.svg?branch=master)
 
 ## Setup
 
