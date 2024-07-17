@@ -4,3 +4,4 @@ composer.phar
 .idea/
 local.env
 composer.lock
+.idea/

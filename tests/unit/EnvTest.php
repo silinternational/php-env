@@ -471,6 +471,18 @@ class EnvTest extends TestCase
         // Assert
         $this->fail("Should have thrown TypeError on default array.");
     }
+
+    public function testGetArray_notFoundWithNullDefault()
+    {
+        // Arrange
+        $varname = 'TESTGETARRAY_NOTFOUNDWITHNULLDEFAULT';
+
+        // Act
+        $actual = Env::getArray($varname, null);
+
+        // Assert
+        $this->assertNull($actual);
+    }
     
     public function testGetArrayFromPrefix_multiple()
     {

@@ -123,12 +123,13 @@ class Env
     }
     
     /**
-     * 
-     * @param string $varname
-     * @param array $default
-     * @return array
+     * Get an array of data from an environment variable containing comma-separated values.
+     *
+     * @param string $varname The name of the desired environment variable.
+     * @param array|null $default The default value to return if the environment variable is not set.
+     * @return array|null
      */
-    public static function getArray($varname, array $default = [])
+    public static function getArray(string $varname, ?array $default = []): ?array
     {
         $value = self::get($varname);
         
