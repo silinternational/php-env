@@ -475,7 +475,7 @@ class EnvTest extends TestCase
     public function testGetArray_notFoundWithNullDefault()
     {
         // Arrange
-        $varname = 'TESTGETARRAY_EXISTSWITHINVALIDDEFAULTTYPE';
+        $varname = 'TESTGETARRAY_NOTFOUNDWITHNULLDEFAULT';
 
         // Act
         $actual = Env::getArray($varname, null);
