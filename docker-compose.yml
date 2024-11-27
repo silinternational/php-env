@@ -1,4 +1,3 @@
-version: '2'
 services:
     test:
         image: silintl/php8:8.1
