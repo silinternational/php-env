@@ -1,6 +1,6 @@
 services:
     test:
-        image: silintl/php8:8.1
+        image: silintl/php8:8.3
         volumes:
             - ./:/data
         working_dir: /data
