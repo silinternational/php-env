@@ -1,4 +1,5 @@
 <?php
+
 namespace Sil\PhpEnv\tests;
 
 use PHPUnit\Framework\TestCase;
@@ -28,6 +29,10 @@ class EnvTest extends TestCase
                 . 'test: "' . $setting . '"'
             );
         }
+        list ($variable, $value) = explode('=', $setting);
+        $variable = trim($variable);
+        $value = trim($value);
+        $_ENV[$variable] = $value;
     }
     
     public function testGet_notFoundNull()
@@ -40,7 +45,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_emptyString()
@@ -54,7 +59,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame(
+        self::assertSame(
             $expected,
             $actual,
             'Expected to get the default value if only whitespace was found.'
@@ -72,7 +77,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame(
+        self::assertSame(
             $expected,
             $actual,
             'Expected to get the default value if only whitespace was found.'
@@ -90,7 +95,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_false()
@@ -104,7 +109,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_falseTitlecase()
@@ -118,7 +123,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_falseUppercase()
@@ -132,7 +137,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_nonEmptyLowercaseString()
@@ -146,7 +151,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_nonEmptyMixedCaseString()
@@ -160,7 +165,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_nonEmptyUppercaseString()
@@ -174,7 +179,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_notSetHasDefault()
@@ -188,7 +193,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname, $default);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_notSetNoDefault()
@@ -201,7 +206,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_null()
@@ -215,7 +220,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_nullTitlecase()
@@ -229,7 +234,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_nullUppercase()
@@ -243,7 +248,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_true()
@@ -257,7 +262,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_trueTitlecase()
@@ -271,7 +276,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGet_trueUppercase()
@@ -285,7 +290,7 @@ class EnvTest extends TestCase
         $actual = Env::get($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testRequireEnv_exists()
@@ -299,7 +304,7 @@ class EnvTest extends TestCase
         $actual = Env::requireEnv($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testRequireEnv_notfound()
@@ -340,7 +345,7 @@ class EnvTest extends TestCase
         $actual = Env::getArray($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArray_existsButNoValue()
@@ -354,7 +359,7 @@ class EnvTest extends TestCase
         $actual = Env::getArray($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArray_existsButNoValueHasDefault()
@@ -369,7 +374,7 @@ class EnvTest extends TestCase
         $actual = Env::getArray($varname, $default);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArray_1exists()
@@ -383,7 +388,7 @@ class EnvTest extends TestCase
         $actual = Env::getArray($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArray_multiExists()
@@ -397,7 +402,7 @@ class EnvTest extends TestCase
         $actual = Env::getArray($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArray_multiEmptyExists()
@@ -411,7 +416,7 @@ class EnvTest extends TestCase
         $actual = Env::getArray($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArray_existsWithDefault()
@@ -426,7 +431,7 @@ class EnvTest extends TestCase
         $actual = Env::getArray($varname, $default);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArray_notFoundWithDefault()
@@ -440,7 +445,7 @@ class EnvTest extends TestCase
         $actual = Env::getArray($varname, $default);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArray_existsWithInvalidDefaultType()
@@ -481,7 +486,7 @@ class EnvTest extends TestCase
         $actual = Env::getArray($varname, null);
 
         // Assert
-        $this->assertNull($actual);
+        self::assertNull($actual);
     }
     
     public function testGetArrayFromPrefix_multiple()
@@ -500,7 +505,7 @@ class EnvTest extends TestCase
             'fourthOne' => null,
             'andAFifth' => '123',
         ];
-        
+
         // Act
         try {
             $actual = Env::getArrayFromPrefix($prefix);
@@ -509,7 +514,7 @@ class EnvTest extends TestCase
         }
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArrayFromPrefix_notFound()
@@ -526,7 +531,7 @@ class EnvTest extends TestCase
         }
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testGetArrayFromPrefix_one()
@@ -546,7 +551,7 @@ class EnvTest extends TestCase
         }
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testRequireArray_exists()
@@ -560,7 +565,7 @@ class EnvTest extends TestCase
         $actual = Env::requireArray($varname);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
     
     public function testRequireArray_notfound()
